@@ -1,0 +1,74 @@
+<br> 
+Hello, welcome to the Jeep gearing calculator. Please enter the following when prompted:<br> <br> 
+&nbsp &nbsp &nbsp &nbsp 1:) The consequent number of each transmission gear ratio when the antecedent equals 1; <br><br>  
+&nbsp &nbsp &nbsp &nbsp 2:) The consequent number of the transfer case gear ratio selected;<br>  <br> 
+&nbsp &nbsp &nbsp &nbsp 3) The consequent number of your axle gear ratio when the antecedent equals 1;<br><br>  
+&nbsp &nbsp &nbsp &nbsp 4) The height (diameter) of your tires in inches; and <br> <br> 
+&nbsp &nbsp &nbsp &nbsp 5) The road speed in miles per hour you would like to have calculated. <br> <br> 
+The page will automatically calculate and display your RPMs at the road speed you input.<br> <br> 
+<input type="button" onclick="GRtoRS()" value="Click" />
+
+<script type="text/javascript">
+
+function GRtoRS (FirstR, SecondR, ThirdR, FourthR, FifthR, TCR, FDR, TD, RS) {
+var FirstR = prompt("First Gear Ratio?");
+var SecondR = prompt("Second Gear Ratio?")
+var ThirdR = prompt("Third Gear Ratio?")
+var FourthR = prompt("Fourth Gear Ratio?")
+var FifthR = prompt("Fifth Gear Ratio?")
+var TCR = prompt("Transfer Case Ratio?")
+var FDR = prompt("Axel Gear Ratio?")
+var TD = prompt("Tire Diameter?")
+var RS = prompt("Road Speed?")
+
+
+var Circumference = (3.14 * TD)/12
+var FPM = (RS * 5280)/60
+var TireRPM = FPM/Circumference
+var FirstRPM = TireRPM * FDR * TCR * FirstR
+var SecondRPM = TireRPM * FDR * TCR * SecondR
+var ThirdRPM = TireRPM * FDR * TCR * ThirdR
+var FourthRPM = TireRPM * FDR * TCR * FourthR
+var FifthRPM = TireRPM * FDR * TCR * FifthR
+
+
+document.write("Thank you for using the gearing to road speed calculator!")
+document.write("<br>")
+document.write("<img src='D:/Programming/JavaScript/Images/speed.jpg'>")
+document.write("Your road speed is ") 
+document.write(RS) 
+document.write(" miles per hour.")
+document.write("<br>")
+if (TCR <= 1) {
+document.write("<img src='D:/Programming/JavaScript/Images/H.jpg'>")
+	document.write("Your transfer case is in High Range.")
+}
+	else {
+document.write("<img src='D:/Programming/JavaScript/Images/L.jpg'>")
+		document.write ("Your transfer case is in Low Range.")
+	}
+document.write("<br>")
+document.write("<img src='D:/Programming/JavaScript/Images/1.jpg'>")
+document.write("First gear RPMs are ") 
+document.write(FirstRPM) 
+document.write("<br>")
+document.write("<img src='D:/Programming/JavaScript/Images/2.jpg'>")
+document.write("Second gear RPMs are ") 
+document.write(SecondRPM) 
+document.write("<br>")
+document.write("<img src='D:/Programming/JavaScript/Images/3.jpg'>")
+document.write("Third gear RPMs are ") 
+document.write(ThirdRPM) 
+document.write("<br>")
+document.write("<img src='D:/Programming/JavaScript/Images/4.jpg'>")
+document.write("Fourth gear RPMs are ") 
+document.write(FourthRPM) 
+document.write("<br>")
+document.write("<img src='D:/Programming/JavaScript/Images/5.jpg'>")
+document.write("Fifth gear RPMs are ") 
+document.write(FifthRPM) 
+}
+
+
+  
+</script>
