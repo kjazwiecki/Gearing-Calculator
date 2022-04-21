@@ -13,11 +13,11 @@ Hello, welcome to the Jeep gearing calculator. Please enter the following when p
 &nbsp &nbsp &nbsp &nbsp 4) The height (diameter) of your tires in inches; and <br> <br> 
 &nbsp &nbsp &nbsp &nbsp 5) The road speed in miles per hour you would like to have calculated. <br> <br> 
 The page will automatically calculate and display your RPMs at the road speed you input.<br> <br> 
+<input type="button" onclick="GRtoRS()" value="Click" />
 
 <script type="text/javascript">
 
-
-setTimeout(function() {
+function GRtoRS (FirstR, SecondR, ThirdR, FourthR, FifthR, TCR, FDR, TD, RS) {
 var FirstR = prompt("First Gear Ratio?");
 var SecondR = prompt("Second Gear Ratio?")
 var ThirdR = prompt("Third Gear Ratio?")
@@ -38,13 +38,14 @@ var ThirdRPM = TireRPM * FDR * TCR * ThirdR
 var FourthRPM = TireRPM * FDR * TCR * FourthR
 var FifthRPM = TireRPM * FDR * TCR * FifthR
 
+
 document.write("Thank you for using the gearing to road speed calculator!")
 document.write("<br>")
 document.write("Your road speed is ") 
 document.write(RS) 
 document.write(" miles per hour.")
 document.write("<br>")
-if (TCR < 1) {document.write("Your transfer case is in High Range.")}
+if (TCR <= 1) {document.write("Your transfer case is in High Range.")}
 	else {document.write ("Your transfer case is in Low Range.")}
 document.write("<br>")
 document.write("First gear RPMs are ") 
@@ -61,8 +62,8 @@ document.write(FourthRPM)
 document.write("<br>")
 document.write("Fifth gear RPMs are ") 
 document.write(FifthRPM) 
+}
 
-}, 1000);
 
   
 </script>
