@@ -1,33 +1,217 @@
 <!doctype html>
-<html>
+
+<html lang="en">
 <head>
-<title>Jeep Gearing Calculator</title>
-<meta name="description" content="Caclulate Your RPMs at any Road Speed">
-<meta name="keywords" content="Jeep Gearing">
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Gearing Calculator</title>
+  <meta name="description" content="A simple gearing evaluation tool for off road vehicles.">
+  <meta name="author" content="KPJ">
+
+  <meta property="og:title" content="Gearing Calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:description" content="A simple gearing evaluation tool for off road vehicles.">
+  <meta property="og:image" content="image.png">
+
+  <link rel="icon" href="/favicon.ico">
+  <link rel="icon" href="D:\Programming\JavaScript\Images\gearfavicon.png" type="image/png+xml">
+
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
 </head>
-<body> <br> 
-Hello, welcome to the Jeep gearing calculator. Please enter the following when prompted:<br> <br> 
-&nbsp &nbsp &nbsp &nbsp 1:) The consequent number of each transmission gear ratio when the antecedent equals 1; <br><br>  
-&nbsp &nbsp &nbsp &nbsp 2:) The consequent number of the transfer case gear ratio selected;<br>  <br> 
-&nbsp &nbsp &nbsp &nbsp 3) The consequent number of your axle gear ratio when the antecedent equals 1;<br><br>  
-&nbsp &nbsp &nbsp &nbsp 4) The height (diameter) of your tires in inches; and <br> <br> 
-&nbsp &nbsp &nbsp &nbsp 5) The road speed in miles per hour you would like to have calculated. <br> <br> 
-The page will automatically calculate and display your RPMs at the road speed you input.<br> <br> 
-<input type="button" onclick="GRtoRS()" value="Click" />
+
+<body>
+<p id="Intro"> Welcome to the Gearing Calculator. Please input your vehicle's gear ratios and selected mile per hour. Then click calculate. The program will then tell you how many RPMs your motor should turn in each gear for the mile per hour selected. <p> <br>
+
+<table border="4" cellpadding="2">
+<tbody>
+<tr>
+<td>Selected Road Speed (miles per hour):</td>
+<td><input type="number" id="RS"></td>
+</tr>
+<tr>
+<td>Tire Diameter (inches):</td>
+<td><input type="number" id="TD"></input></td>
+</tr>
+<tr>
+<td>Transfer Case Ratio:</td>
+<td><input type="number" id="TCR"></input></td>
+</tr>
+<tr>
+<td>Final Drive (axle) Ratio:</td>
+<td><input type="number" id="FDR"></input></td>
+</tr>
+<tr>
+<td>First Gear Ratio:</td>
+<td><input type="number" id="1GR"></input></td>
+</tr>
+<tr>
+<td>Second Gear Ratio:</td>
+<td><input type="number" id="2GR"></td>
+</tr>
+<tr>
+<td>Third Gear Ratio:</td>
+<td><input type="number" id="3GR"></td>
+</tr>
+<tr>
+<td>Fourth Gear Ratio:</td>
+<td><input type="number" id="4GR"></td>
+</tr>
+<tr>
+<td>Fifth Gear Ratio:</td>
+<td><input type="number" id="5GR"></td>
+</tr>
+<tr>
+<td>Sixth Gear Ratio:</td>
+<td><input type="number" id="6GR"></td>
+</tr>
+</tbody>
+</table>
+
+<br>
+<input type="button" onclick="GRtoRS()" value="Calculate" />
+<br><br>  
+
+<table border="4" cellpadding="2">
+<tbody>
+<tr>
+<td><img width=100px height=100px src='D:/Programming/JavaScript/Images/speed.jpg'></td>
+<td>Your road speed is:</td>
+<td><p id="RoadSpeed"></p></td>
+<td>MPH.</td>
+</tr>
+<tr>
+<td><img width=100px height=100px id="TransferCaseImage" src='D:/Programming/JavaScript/Images/H.jpg'></td>
+<td>Your transfer case is in:</td>
+<td><p id="TransferCase"><p></td>
+<td>range.</td>
+</tr>
+<tr>
+<td><img width=100px height=100px src='D:/Programming/JavaScript/Images/1.jpg'></td>
+<td>Your first gear engine speed is:</td>
+<td><p id="FirstRPM"></p></td>
+<td>RPM.</td>
+</tr>
+<tr>
+<td><img width=100px height=100px src='D:/Programming/JavaScript/Images/2.jpg'></td>
+<td>Your second gear engine speed is:</td>
+<td><p id="SecondRPM"></p></td>
+<td>RPM.</td>
+</tr>
+<tr>
+<td><img width=100px height=100px src='D:/Programming/JavaScript/Images/3.jpg'></td>
+<td>Your third gear engine speed is:</td>
+<td><p id="ThirdRPM"></p></td>
+<td>RPM.</td>
+</tr>
+<tr>
+<td><img width=100px height=100px src='D:/Programming/JavaScript/Images/4.jpg'></td>
+<td>Your fourth gear engine speed is:</td>
+<td><p id="FourthRPM"></p></td>
+<td>RPM.</td>
+</tr>
+<tr>
+<td><img width=100px height=100px src='D:/Programming/JavaScript/Images/5.jpg'></td>
+<td>Your fifth gear engine speed is:</td>
+<td><p id="FifthRPM"></p></td>
+<td>RPM.</td>
+</tr>
+<tr>
+<td><img width=100px height=100px src='D:/Programming/JavaScript/Images/6.jpg'></td>
+<td>Your sixth gear engine speed is:</td>
+<td><p id="SixthRPM"></p></td>
+<td>RPM.</td>
+</tr>
+</tbody>
+</table>
+
+<br><br>
+The selections below will automatically populate the form above with common configurations by clicking submit. Transmissions without six gears will use the last gear ratio to fill in teh remaining gears. <br>
+<table border="4" cellpadding="2">
+<tbody>
+<tr>
+<td><label for="Transmission">Choose a Transmission:</label></td>
+<td>
+  <select name="Transmission" id="Transmission">
+  <option value="AX5" id="AX5">5 speed AX-5 manual</option>
+  <option value="AX15">5 speed AX-15 manual</option>
+  <option value="NV3550">5 speed NV3550 manual</option>
+  <option value="NVG1500">5 speed NVG1500 manual</option>
+  <option value="NSG370">6 speed NSG370 manual</option>
+  <option value="TF999">3 speed TF999 auto</option>
+  <option value="32RH"> 3 speed 32RH auto</option>
+  <option value="42RLE">4 speed 42RLE auto</option>
+</td>
+</tr>
+<tr>
+<td><label for="Axle">Choose an Axle Ratio:</label></td>
+<td><select name="Axle" id="Axle">
+  <option value="307">3.07</option>
+  <option value="355">3.55</option>
+  <option value="373">3.73</option>
+  <option value="410">4.10</option>
+  <option value="456">4.56</option>
+  <option value="488">4.88</option>
+  <option value="513">5.13</option>
+  <option value="529">5.29</option>
+  <option value="538">5.38</option>
+  <option value="571">5.71</option>
+  <option value="617">6.17</option>
+  <option value="717">7.17</option>
+</td>
+</tr>
+<tr>
+<td><label for="TCase">Choose a Transfer Case:</label></td>
+<td>
+  <select name="TCase" id="Tcase">
+  <option value="H">High Range</option>
+  <option value="NV231">Low Range NV231 Command-Trac</option>
+  <option value="NV241">Low Range NV241 Rock-Trac</option>
+</td>
+</tr>
+<tr>
+<td><label for="Tire">Choose a Tire Size:</label></td>
+<td>
+  <select name="Tire" id="Tire">
+  <option value="28">28"</option>
+  <option value="29">29"</option>
+  <option value="30">30"</option>
+  <option value="31">31"</option>
+  <option value="32">32"</option>
+  <option value="33">33"</option>
+  <option value="34">34"</option>
+  <option value="35">35"</option>
+  <option value="36">36"</option>
+  <option value="37">37"</option>
+  <option value="38">38"</option>
+  <option value="39">39"</option>
+  <option value="40">40"</option>
+  <option value="41">41"</option>
+  <option value="42">42"</option>
+</td>
+</tr>
+</tbody>
+</table> <br>
+<input type="button" onclick="PopForm()" value="Submit" />
+
 
 <script type="text/javascript">
 
 function GRtoRS (FirstR, SecondR, ThirdR, FourthR, FifthR, TCR, FDR, TD, RS) {
-var FirstR = prompt("First Gear Ratio?");
-var SecondR = prompt("Second Gear Ratio?")
-var ThirdR = prompt("Third Gear Ratio?")
-var FourthR = prompt("Fourth Gear Ratio?")
-var FifthR = prompt("Fifth Gear Ratio?")
-var TCR = prompt("Transfer Case Ratio?")
-var FDR = prompt("Axel Gear Ratio?")
-var TD = prompt("Tire Diameter?")
-var RS = prompt("Road Speed?")
-
+var FirstR = document.getElementById("1GR").value
+var SecondR = document.getElementById("2GR").value
+var ThirdR = document.getElementById("3GR").value
+var FourthR = document.getElementById("4GR").value
+var FifthR = document.getElementById("5GR").value
+var SixthR = document.getElementById("6GR").value
+var TCR = document.getElementById("TCR").value
+var FDR = document.getElementById("FDR").value
+var TD = document.getElementById("TD").value
+var RS = document.getElementById("RS").value
 
 var Circumference = (3.14 * TD)/12
 var FPM = (RS * 5280)/60
@@ -37,48 +221,181 @@ var SecondRPM = TireRPM * FDR * TCR * SecondR
 var ThirdRPM = TireRPM * FDR * TCR * ThirdR
 var FourthRPM = TireRPM * FDR * TCR * FourthR
 var FifthRPM = TireRPM * FDR * TCR * FifthR
+var SixthRPM = TireRPM * FDR * TCR * SixthR
 
+var FirstRPM = Math.round(FirstRPM)
+var SecondRPM = Math.round(SecondRPM)
+var ThirdRPM = Math.round(ThirdRPM)
+var FourthRPM = Math.round(FourthRPM)
+var FifthRPM = Math.round(FifthRPM)
+var SixthRPM = Math.round(SixthRPM)
 
-document.write("Thank you for using the gearing to road speed calculator!")
-document.write("<br>")
-document.write("<img src='D:/Programming/JavaScript/Images/speed.jpg'>")
-document.write("Your road speed is ") 
-document.write(RS) 
-document.write(" miles per hour.")
-document.write("<br>")
+var internationalNumberFormat = new Intl.NumberFormat('en-US')
+var FirstRPM = internationalNumberFormat.format(FirstRPM)
+var SecondRPM = internationalNumberFormat.format(SecondRPM)
+var ThirdRPM = internationalNumberFormat.format(ThirdRPM)
+var FourthRPM = internationalNumberFormat.format(FourthRPM)
+var FifthRPM = internationalNumberFormat.format(FifthRPM)
+var SixthRPM = internationalNumberFormat.format(SixthRPM)
+
+document.getElementById("RoadSpeed").innerHTML = RS
+document.getElementById("FirstRPM").innerHTML = FirstRPM
+document.getElementById("SecondRPM").innerHTML = SecondRPM
+document.getElementById("ThirdRPM").innerHTML = ThirdRPM
+document.getElementById("FourthRPM").innerHTML = FourthRPM
+document.getElementById("FifthRPM").innerHTML = FifthRPM
+document.getElementById("SixthRPM").innerHTML = SixthRPM
+
 if (TCR <= 1) {
-document.write("<img src='D:/Programming/JavaScript/Images/H.jpg'>")
-	document.write("Your transfer case is in High Range.")
+document.getElementById("TransferCase").innerHTML = "High"
+document.getElementById("TransferCaseImage").src = 'D:/Programming/JavaScript/Images/H.jpg'
+} 
+else {
+document.getElementById("TransferCase").innerHTML = "Low"
+document.getElementById("TransferCaseImage").src = 'D:/Programming/JavaScript/Images/L.jpg'
 }
-	else {
-document.write("<img src='D:/Programming/JavaScript/Images/L.jpg'>")
-		document.write ("Your transfer case is in Low Range.")
-	}
-document.write("<br>")
-document.write("<img src='D:/Programming/JavaScript/Images/1.jpg'>")
-document.write("First gear RPMs are ") 
-document.write(FirstRPM) 
-document.write("<br>")
-document.write("<img src='D:/Programming/JavaScript/Images/2.jpg'>")
-document.write("Second gear RPMs are ") 
-document.write(SecondRPM) 
-document.write("<br>")
-document.write("<img src='D:/Programming/JavaScript/Images/3.jpg'>")
-document.write("Third gear RPMs are ") 
-document.write(ThirdRPM) 
-document.write("<br>")
-document.write("<img src='D:/Programming/JavaScript/Images/4.jpg'>")
-document.write("Fourth gear RPMs are ") 
-document.write(FourthRPM) 
-document.write("<br>")
-document.write("<img src='D:/Programming/JavaScript/Images/5.jpg'>")
-document.write("Fifth gear RPMs are ") 
-document.write(FifthRPM) 
 }
 
 
+function PopForm() {
+
+var e = document.getElementById("Transmission");
+var result = e.options[e.selectedIndex].value;
+
+if (result == "AX5") {
+  document.getElementById("1GR").value = 3.93
+  document.getElementById("2GR").value = 2.33
+  document.getElementById("3GR").value = 1.45
+  document.getElementById("4GR").value = 1.00
+  document.getElementById("5GR").value = 0.85
+  document.getElementById("6GR").value = 0.85
+}
+if (result == "AX15") {
+  document.getElementById("1GR").value = 3.83
+  document.getElementById("2GR").value = 2.33
+  document.getElementById("3GR").value = 1.44
+  document.getElementById("4GR").value = 1.00
+  document.getElementById("5GR").value = 0.79
+  document.getElementById("6GR").value = 0.79
+}
+if (result == "NV3550") {
+  document.getElementById("1GR").value = 4.01
+  document.getElementById("2GR").value = 2.33
+  document.getElementById("3GR").value = 1.39
+  document.getElementById("4GR").value = 1.00
+  document.getElementById("5GR").value = 0.78
+  document.getElementById("6GR").value = 0.78
+}
+if (result == "NVG1500") {
+  document.getElementById("1GR").value = 3.96
+  document.getElementById("2GR").value = 2.37
+  document.getElementById("3GR").value = 1.49
+  document.getElementById("4GR").value = 1.00
+  document.getElementById("5GR").value = 0.83
+  document.getElementById("6GR").value = 0.83
+}
+if (result == "NSG370") {
+  document.getElementById("1GR").value = 4.46
+  document.getElementById("2GR").value = 2.61
+  document.getElementById("3GR").value = 1.72
+  document.getElementById("4GR").value = 1.25
+  document.getElementById("5GR").value = 1.00
+  document.getElementById("6GR").value = 0.84
+}
+if (result == "TF999") {
+  document.getElementById("1GR").value = 2.74
+  document.getElementById("2GR").value = 1.55
+  document.getElementById("3GR").value = 1.00
+  document.getElementById("4GR").value = 1.00
+  document.getElementById("5GR").value = 1.00
+  document.getElementById("6GR").value = 1.00
+}
+if (result == "32RH") {
+  document.getElementById("1GR").value = 2.74
+  document.getElementById("2GR").value = 1.54
+  document.getElementById("3GR").value = 1.00
+  document.getElementById("4GR").value = 1.00
+  document.getElementById("5GR").value = 1.00
+  document.getElementById("6GR").value = 1.00
+}
+if (result == "42RLE") {
+  document.getElementById("1GR").value = 2.84
+  document.getElementById("2GR").value = 1.57
+  document.getElementById("3GR").value = 1.00
+  document.getElementById("4GR").value = 0.69
+  document.getElementById("5GR").value = 0.69
+  document.getElementById("6GR").value = 0.69
+}
+
+
+else {}
+
+var f = document.getElementById("Axle");
+var resultf = f.options[f.selectedIndex].value;
+
+if (resultf == "307") {
+document.getElementById("FDR").value = 3.07
+}
+if (resultf == "355") {
+document.getElementById("FDR").value = 3.55
+}
+if (resultf == "373") {
+document.getElementById("FDR").value = 3.73
+}
+if (resultf == "410") {
+document.getElementById("FDR").value = 4.10
+}
+if (resultf == "456") {
+document.getElementById("FDR").value = 4.56
+}
+if (resultf == "488") {
+document.getElementById("FDR").value = 4.88
+}
+if (resultf == "513") {
+document.getElementById("FDR").value = 5.13
+}
+if (resultf == "529") {
+document.getElementById("FDR").value = 5.29
+}
+if (resultf == "538") {
+document.getElementById("FDR").value = 5.38
+}
+if (resultf == "571") {
+document.getElementById("FDR").value = 5.71
+}
+if (resultf == "617") {
+document.getElementById("FDR").value = 6.17
+}
+if (resultf == "717") {
+document.getElementById("FDR").value = 7.17
+}
+else {}
+
+var g = document.getElementById("Tcase");
+var resultg = g.options[g.selectedIndex].value;
+
+if (resultg == "H") {
+document.getElementById("TCR").value = 1.00
+}
+if (resultg == "NV231") {
+document.getElementById("TCR").value = 2.71
+}
+if (resultg == "NV241") {
+document.getElementById("TCR").value = 4.10
+}
+else {}
+
+var h = document.getElementById("Tire");
+var resulth = h.options[h.selectedIndex].value;
+document.getElementById("TD").value = resulth
+}
   
 </script>
+
+
+
+
+
 
 
 </body>
